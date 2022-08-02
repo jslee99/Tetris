@@ -38,8 +38,8 @@ int main(void) {
 			if (game.get_game_over())break;			
 		}
 		else {
-			//rotation
-			//left_right
+			game.left_right_check();
+			game.rotation_check();
 			game.controlTable();
 			system("cls");
 			game.drawTable();
@@ -48,10 +48,12 @@ int main(void) {
 			if (!game.get_turn_change()) {
 				game.recontrolTable();
 				game.downBlock();			
-				Sleep(50);
+				Sleep(100);
 			}
 			else {
 				game.convert_active_block_to_static_block();
+				game.combo_check();
+				Sleep(100);
 			}
 		}
 	}
