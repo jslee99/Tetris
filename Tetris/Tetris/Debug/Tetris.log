@@ -1,5 +1,2 @@
 ﻿  game.cpp
-  main.cpp
-  코드를 생성하고 있습니다...
-C:\Users\junsub\study\2022 sum\Tetris\Tetris\Tetris\game.cpp(151): warning C4715: 'Game::one_cycle_while_running': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Tetris.vcxproj -> C:\Users\junsub\study\2022 sum\Tetris\Tetris\Debug\Tetris.exe

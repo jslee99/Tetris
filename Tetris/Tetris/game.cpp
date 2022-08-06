@@ -97,7 +97,7 @@ void Game::combo_check(){
 		}
 	}
 }
-
+/*
 bool Game::one_cycle_runnig(){
 	if (this->get_turn_change()) {
 		this->chage_block_q();
@@ -125,6 +125,37 @@ bool Game::one_cycle_runnig(){
 			this->downBlock();
 			system("cls");
 			this->drawTable();
+		}
+		else {
+			this->convert_active_block_to_static_block();
+			this->combo_check();
+		}
+		return false;
+	}
+}*/
+
+bool Game::one_cycle_runnig() {
+	if (this->get_turn_change()) {
+		this->chage_block_q();
+		this->check_gameover_at_change_turn();
+		if (this->get_game_over())
+			return true;
+		else
+			return false;
+	}
+	else {
+		this->left_right_check();
+		this->rotation_check();
+		this->controlTable();
+		system("cls");
+		this->drawTable();
+		Sleep(500);
+		this->check_turn_change();
+
+		if (!this->get_turn_change()) {
+			this->recontrolTable();
+			this->downBlock();
+			
 		}
 		else {
 			this->convert_active_block_to_static_block();
