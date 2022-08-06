@@ -42,7 +42,10 @@ void Game::left_right_check(){
 				}
 			}
 		}
-		if (flag) c--;
+		if (flag) {
+			c--;
+			is_moving_left_right = true;
+		}
 	}
 	
 
@@ -55,7 +58,10 @@ void Game::left_right_check(){
 				}
 			}
 		}
-		if (flag) c++;
+		if (flag) {
+			c++;
+			is_moving_left_right = true;
+		}
 	}
 }
 
@@ -91,6 +97,70 @@ void Game::combo_check(){
 		}
 	}
 }
+
+bool Game::one_cycle_runnig(){
+	if (this->get_turn_change()) {
+		this->chage_block_q();
+		this->check_gameover_at_change_turn();
+		if (this->get_game_over())
+			return true;
+		else
+			return false;
+	}
+	else {
+		this->left_right_check();
+		this->rotation_check();
+		this->controlTable();
+		system("cls");
+		this->drawTable();
+		Sleep(500);
+		this->recontrolTable();
+		if (this->is_moving_left_right) {
+			is_moving_left_right = false;
+			return false;
+		}
+		this->check_turn_change();
+
+		if (!this->get_turn_change()) {
+			this->downBlock();
+			system("cls");
+			this->drawTable();
+		}
+		else {
+			this->convert_active_block_to_static_block();
+			this->combo_check();
+		}
+		return false;
+	}
+}
+
+/*
+bool Game::one_cycle_while_running() {
+	if (this->turn_change) {
+		this->chage_block_q();
+		this->check_gameover_at_change_turn();
+		if (this->game_over) return true;
+
+		return false;
+	}
+	else {
+		this->check_turn_change();
+		if (this->turn_change) {
+			this->convert_active_block_to_static_block();
+			this->combo_check();
+		}
+		else {
+			if (!this->is_moving_left_right) {
+				this->downBlock();
+				this->controlTable();
+				system("cls");
+				Sleep(500);
+				this->recontrolTable();
+			}
+		}
+	}
+}
+*/
 
 void Game::rotation_check(){
 	if (GetAsyncKeyState(VK_UP)) {
@@ -182,7 +252,7 @@ void Game::reset_RC(){
 void Game::gameInit() {
 	turn_change = true;
 	game_over = false;
-	
+	is_moving_left_right = false;
 
 	srand((unsigned int)time(NULL));
 	for (int i = 0; i < 7; i++) {
@@ -227,3 +297,4 @@ void Game::controlTable() {
 		}
 	}
 }
+

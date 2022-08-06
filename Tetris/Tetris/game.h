@@ -19,6 +19,7 @@ private:
 	int cur_rotation;// 0 ~ 3
 	bool turn_change;
 	bool game_over;
+	bool is_moving_left_right;
 	queue<int> next_block_q;
 	const int BLOCK[7][4][4][4] = {
 		{{	{0, 0, 0, 0},
@@ -174,6 +175,8 @@ private:
 			{0, 0, 0, 0}} },
 	};
 public :
+	bool one_cycle_while_running();
+	bool one_cycle_runnig();
 	void combo_check();
 	void left_right_check();
 	void rotation_check();

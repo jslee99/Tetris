@@ -32,29 +32,7 @@ int main(void) {
 	hideCursor();
 	game.gameInit();
 	while (1) {
-		if (game.get_turn_change()) {
-			game.chage_block_q();
-			game.check_gameover_at_change_turn();
-			if (game.get_game_over())break;			
-		}
-		else {
-			game.left_right_check();
-			game.rotation_check();
-			game.controlTable();
-			system("cls");
-			game.drawTable();
-			game.check_turn_change();
-
-			if (!game.get_turn_change()) {
-				game.recontrolTable();
-				game.downBlock();			
-				Sleep(100);
-			}
-			else {
-				game.convert_active_block_to_static_block();
-				game.combo_check();
-				Sleep(100);
-			}
-		}
+		bool is_game_over = game.one_cycle_runnig();
+		if (is_game_over) break;
 	}
 }
